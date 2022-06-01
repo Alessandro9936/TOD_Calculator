@@ -23,5 +23,15 @@ describe("calculator", () => {
 
       expect(testCalculator.add(num1, num2)).toBe(undefined);
     });
+
+    it("result is defined, add number to result", () => {
+      testCalculator.result = 30;
+      const num1 = 20;
+      const num2 = 50;
+
+      testCalculator.add(num1, num2);
+
+      expect(testCalculator.result).toBe(80);
+    });
   });
 });
