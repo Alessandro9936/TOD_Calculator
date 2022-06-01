@@ -34,4 +34,33 @@ describe("calculator", () => {
       expect(testCalculator.result).toBe(80);
     });
   });
+
+  describe("sub ()", () => {
+    it("subs two numbers", () => {
+      const num1 = 20;
+      const num2 = 10;
+      const resultTest = num1 - num2;
+
+      testCalculator.sub(num1, num2);
+
+      expect(testCalculator.result).toBe(resultTest);
+    });
+
+    it("return if arguments are strings", () => {
+      const num1 = 10;
+      const num2 = "20";
+
+      expect(testCalculator.sub(num1, num2)).toBe(undefined);
+    });
+
+    it("result is defined, add number to result", () => {
+      testCalculator.result = 80;
+      const num1 = 20;
+      const num2 = 50;
+
+      testCalculator.sub(num1, num2);
+
+      expect(testCalculator.result).toBe(30);
+    });
+  });
 });
