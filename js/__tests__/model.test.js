@@ -53,7 +53,7 @@ describe("calculator", () => {
       expect(testCalculator.sub(num1, num2)).toBe(undefined);
     });
 
-    it("result is defined, add number to result", () => {
+    it("result is defined, sub number to result", () => {
       testCalculator.result = 80;
       const num1 = 20;
       const num2 = 50;
