@@ -2,30 +2,54 @@ class Calculator {
   constructor() {
     this.firstNumber;
     this.secondNumber;
-    this.operation;
+    this.calc;
     this.result;
   }
 
-  _convertToNumbers(...nums) {
-    return nums.map((num) => +num);
+  setFirstNumber(num) {
+    return (this.firstNumber = +num);
   }
 
-  setFirstNumber(num) {}
-
-  setSecondNumber() {}
-
-  setOperation() {}
-
-  add(num1, num2) {
-    this._convertToNumbers(num1, num2);
-
-    this.result ? (this.result += num2) : (this.result = num1 + num2);
+  setSecondNumber(num) {
+    return (this.secondNumber = +num);
   }
 
-  sub(num1, num2) {
-    this._convertToNumbers(num1, num2);
+  setOperation(operation) {
+    return (this.calc = operation);
+  }
 
-    this.result ? (this.result -= num2) : (this.result = num1 - num2);
+  checkOperation() {
+    const operators = {
+      "+": this.add(),
+      "-": this.sub(),
+      "*": this.mol(),
+      "/": this.div(),
+    };
+    return operators[this.calc];
+  }
+
+  add() {
+    return !this.result
+      ? (this.result = this.firstNumber + this.secondNumber)
+      : (this.result += this.secondNumber);
+  }
+
+  sub() {
+    return !this.result
+      ? (this.result = this.firstNumber - this.secondNumber)
+      : (this.result -= this.secondNumber);
+  }
+
+  mol() {
+    return !this.result
+      ? (this.result = this.firstNumber * this.secondNumber)
+      : (this.result *= this.secondNumber);
+  }
+
+  div() {
+    return !this.result
+      ? (this.result = this.firstNumber / this.secondNumber)
+      : (this.result /= this.secondNumber);
   }
 }
 
