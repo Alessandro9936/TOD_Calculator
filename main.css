@@ -11,11 +11,15 @@
   --display-background: hsl(224, 36%, 15%);
   /*Buttons*/
   --del-reset-background: hsl(225, 21%, 49%);
+  --del-reset-background-hover: hsl(225, 21%, 60%);
   --del-reset-shadow: hsl(224, 28%, 35%);
   --equal-background: hsl(6, 63%, 50%);
+  --equal-background-hover: hsl(6, 63%, 60%);
   --equal-shadow: hsl(6, 70%, 34%);
   --key-background: hsl(30, 25%, 89%);
+  --key-background-hover: hsl(30, 25%, 100%);
   --key-shadow: hsl(28, 16%, 65%);
+  --key-color: #ffffff;
   /*Text*/
   --very-dark-grayish-blue: hsl(221, 14%, 31%);
   --white: #ffffff;
@@ -31,10 +35,13 @@
   --display-background: hsl(0, 0%, 93%);
   /*Buttons*/
   --del-reset-background: hsl(185, 42%, 37%);
+  --del-reset-background-hover: hsl(185, 42%, 47%);
   --del-reset-shadow: hsl(185, 58%, 25%);
   --equal-background: hsl(25, 98%, 40%);
+  --equal-background-hover: hsl(25, 98%, 50%);
   --equal-shadow: hsl(25, 99%, 27%);
   --key-background: hsl(45, 7%, 89%);
+  --key-background-hover: hsl(45, 7%, 100%);
   --key-shadow: hsl(35, 11%, 61%);
   /*Text*/
   --very-dark-grayish-blue: hsl(60, 10%, 19%);
@@ -51,10 +58,13 @@
   --display-background: hsl(281, 89%, 26%);
   /*Buttons*/
   --del-reset-background: hsl(285, 91%, 52%);
+  --del-reset-background-hover: hsl(285, 91%, 62%);
   --del-reset-shadow: hsl(176, 100%, 44%);
   --equal-background: hsl(177, 92%, 70%);
+  --equal-background-hover: hsl(177, 92%, 80%);
   --equal-shadow: hsl(268, 47%, 21%);
   --key-background: hsl(290, 70%, 36%);
+  --key-background-hover: hsl(290, 70%, 46%);
   --key-shadow: hsl(52, 100%, 62%);
   /*Text*/
   --very-dark-grayish-blue: hsl(198, 20%, 13%);
@@ -62,6 +72,20 @@
 
   --general-padding: 2.4rem;
   --general-border: 15px;
+}
+
+::-webkit-scrollbar {
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: var(--del-reset-background);
+  border-radius: 100vh;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--del-reset-background-hover);
+  border-radius: 100vh;
 }
 
 body {
@@ -78,6 +102,10 @@ main {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+button {
+  cursor: pointer;
 }
 
 .calculator-container {
@@ -98,6 +126,37 @@ main {
 .header {
   background-color: var(--main-background);
   grid-area: a;
+
+  display: flex;
+  align-items: flex-end;
+  gap: 1rem;
+}
+
+.header button {
+  margin-top: auto;
+
+  display: inline-block;
+  padding: 0.8rem;
+  border-radius: 50%;
+  border: none;
+}
+
+.header button:nth-child(1) {
+  background-color: hsl(0, 0%, 90%);
+  border: 1px solid black;
+}
+.header button:nth-child(2) {
+  background-color: hsl(268, 75%, 9%);
+  border: 1px solid black;
+}
+.header button:nth-child(3) {
+  background-color: hsl(222, 26%, 31%);
+  border: 1px solid black;
+}
+
+.header p {
+  font-size: 2rem;
+  color: var(--key-color);
 }
 
 .header {
@@ -113,13 +172,19 @@ main {
   background-color: var(--display-background);
   padding: var(--general-padding);
   border-radius: var(--general-border);
+
+  overflow: hidden;
 }
 
 .result {
   font-size: 4.8rem;
-  color: var(--white);
+  color: var(--key-color);
 
   margin-top: 1rem;
+
+  overflow-x: auto;
+  overflow-y: hidden;
+  white-space: nowrap;
 }
 
 .keyboard {
@@ -142,6 +207,11 @@ main {
   font-size: inherit;
   font-family: inherit;
   font-weight: inherit;
+}
+
+.btn:active {
+  border-bottom: none;
+  margin-top: 2px;
 }
 
 .number-operation-btn {
@@ -170,4 +240,17 @@ main {
 
 [data-button="equal"] {
   grid-column: 3 / 5;
+}
+[data-button="equal"]:hover {
+  background-color: var(--equal-background-hover);
+}
+
+[data-button="number"]:hover,
+[data-button="operation"]:hover {
+  background-color: var(--key-background-hover);
+}
+
+[data-button="reset"]:hover,
+[data-button="delete"]:hover {
+  background-color: var(--del-reset-background-hover);
 }
