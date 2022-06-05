@@ -1,7 +1,7 @@
 import Calculator from "./model.js";
 import CalculatorDisplay from "./view.js";
 
-const calculator = new Calculator();
+let calculator = new Calculator();
 
 const numbers = document.querySelectorAll("[data-button=number]");
 const operators = document.querySelectorAll("[data-button=operation]");
@@ -10,8 +10,18 @@ const reset = document.querySelector("[data-button=reset]");
 const equalButton = document.querySelector("[data-button=equal]");
 const resultDisplay = document.querySelector(".result");
 
+function resetCalculator() {
+  calculator = new Calculator();
+}
+
 function display(value) {
   CalculatorDisplay.displayNumber(value);
+}
+
+function setOperators(num1, operator, num2) {
+  calculator.setFirstNumber(num1);
+  calculator.setOperation(operator);
+  calculator.setSecondNumber(num2);
 }
 
 numbers.forEach((number) => {
@@ -24,17 +34,24 @@ numbers.forEach((number) => {
 operators.forEach((operator) => {
   operator.addEventListener("click", () => {
     const operationToDo = operator.dataset.operation;
-    if (calculator.calc) return;
-    calculator.setOperation(operationToDo);
     display(` ${operationToDo} `);
   });
 });
 
 equalButton.addEventListener("click", () => {
-  const [first, , second] = resultDisplay.textContent.split(" ");
-  calculator.setFirstNumber(first);
-  calculator.setSecondNumber(second);
+  const [first, operator, second] = resultDisplay.textContent.split(" ");
+  setOperators(first, operator, second);
 
   const result = calculator.checkOperation();
-  console.log(result);
+  CalculatorDisplay.displayResult(result);
+});
+
+deleteButton.addEventListener("click", () => {
+  if (resultDisplay.textContent == calculator.result) return;
+  CalculatorDisplay.pop();
+});
+
+reset.addEventListener("click", () => {
+  resetCalculator();
+  CalculatorDisplay.cleanDisplay();
 });
