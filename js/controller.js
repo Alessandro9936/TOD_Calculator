@@ -19,13 +19,12 @@ function checkNumber(textContent, next) {
 
 function checkResult(result) {
   if (calculator.result == result) return false;
-  if (!calculator.result) return false;
   return true;
 }
 
 function checkOperators() {
   const operators = ["+", "-", "x", "/"];
-  return resultDisplay.textContent.includes(...operators);
+  return operators.find((op) => resultDisplay.textContent.includes(op));
 }
 
 function resetCalculator() {
@@ -53,10 +52,9 @@ numbers.forEach((number) => {
 operators.forEach((operator) => {
   operator.addEventListener("click", () => {
     const checker = checkOperators();
-    if (!checker) {
-      const operationToDo = operator.dataset.operation;
-      display(` ${operationToDo} `);
-    }
+    if (checker) return;
+    const operationToDo = operator.dataset.operation;
+    display(` ${operationToDo} `);
   });
 });
 
@@ -80,3 +78,31 @@ reset.addEventListener("click", () => {
   resetCalculator();
   CalculatorDisplay.cleanDisplay();
 });
+
+//Toggle theme
+
+const body = document.querySelector("body");
+const initialTheme = "light";
+
+const setTheme = (theme) => {
+  localStorage.setItem("theme", theme);
+  body.setAttribute("data-theme", theme);
+};
+
+document.querySelector("[data-toggle]").addEventListener("click", toggleTheme);
+
+function toggleTheme() {
+  const activeTheme = localStorage.getItem("theme");
+
+  if (activeTheme === "light") setTheme("dark");
+  else setTheme("light");
+}
+
+const setThemeOnInit = () => {
+  const savedTheme = localStorage.getItem("theme");
+  savedTheme
+    ? body.setAttribute("data-theme", savedTheme)
+    : setTheme(initialTheme);
+};
+
+setThemeOnInit();
