@@ -13,7 +13,7 @@ const resultDisplay = document.querySelector(".result");
 //Checker
 function checkNumber(textContent, next) {
   if (textContent == calculator.result) return false;
-  if (textContent[textContent.length - 1] === next) return false;
+  if (textContent[textContent.length - 1] === "." && next === ".") return false;
   return true;
 }
 
