@@ -21,6 +21,7 @@ class CalculatorDisplay {
 
   displayResult(result) {
     this.cleanDisplay();
+    if (isNaN(result)) return this.displayNumber("Not valid. Reset");
     this.displayNumber(result);
   }
 }

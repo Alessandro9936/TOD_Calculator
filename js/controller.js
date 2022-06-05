@@ -19,6 +19,7 @@ function checkNumber(textContent, next) {
 
 function checkResult(result) {
   if (calculator.result == result) return false;
+  if (!calculator.result) return false;
   return true;
 }
 
