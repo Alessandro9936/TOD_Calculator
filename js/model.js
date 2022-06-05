@@ -7,25 +7,25 @@ class Calculator {
   }
 
   setFirstNumber(num) {
-    return (this.firstNumber = +num);
+    this.firstNumber = +num;
   }
 
   setSecondNumber(num) {
-    return (this.secondNumber = +num);
+    this.secondNumber = +num;
   }
 
   setOperation(operation) {
-    return (this.calc = operation);
+    this.calc = operation;
   }
 
   checkOperation() {
     const operators = {
-      "+": this.add(),
-      "-": this.sub(),
-      "*": this.mol(),
-      "/": this.div(),
+      "+": () => this.add(),
+      "-": () => this.sub(),
+      "*": () => this.mol(),
+      "/": () => this.div(),
     };
-    return operators[this.calc];
+    return operators[this.calc]();
   }
 
   add() {
@@ -53,4 +53,4 @@ class Calculator {
   }
 }
 
-module.exports = Calculator;
+export default Calculator;

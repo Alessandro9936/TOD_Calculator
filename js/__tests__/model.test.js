@@ -1,4 +1,4 @@
-const Calculator = require("../model");
+import Calculator from "../model";
 
 describe("calculator", () => {
   let testCalculator;
@@ -58,9 +58,9 @@ describe("calculator", () => {
       testCalculator.secondNumber = 20;
       testCalculator.calc = "+";
 
-      const testResult = testCalculator.checkOperation();
+      const result = testCalculator.checkOperation();
 
-      expect(testResult).toBe(50);
+      expect(result).toBe(50);
     });
 
     it("call sub id this.calc = -", () => {
@@ -68,9 +68,9 @@ describe("calculator", () => {
       testCalculator.secondNumber = 10;
       testCalculator.calc = "-";
 
-      const testResult = testCalculator.checkOperation();
+      const result = testCalculator.checkOperation();
 
-      expect(testResult).toBe(40); //returns 50
+      expect(result).toBe(40);
     });
 
     it("call mol id this.calc = *", () => {
@@ -78,19 +78,20 @@ describe("calculator", () => {
       testCalculator.secondNumber = 10;
       testCalculator.calc = "*";
 
-      const testResult = testCalculator.checkOperation();
+      const result = testCalculator.checkOperation();
 
-      expect(testResult).toBe(200);
+      expect(result).toBe(200);
     });
 
-    it("call div if this.calc = /", () => {
+    it("call div id this.calc = /", () => {
       testCalculator.firstNumber = 50;
       testCalculator.secondNumber = 10;
       testCalculator.calc = "/";
+      testCalculator.result = 0;
 
-      const testResult = testCalculator.checkOperation();
+      const result = testCalculator.checkOperation();
 
-      expect(testResult).toBe(5); //returns 50
+      expect(result).toBe(5);
     });
   });
 
